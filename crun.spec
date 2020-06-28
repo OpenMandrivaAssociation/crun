@@ -1,12 +1,12 @@
 Name:		crun
 Summary:	OCI Container Runtime fully written in C
-Version:	0.3
+Version:	0.13
 Release:	1
-Source0:	https://github.com/containers/crun/archive/v0.3/%{name}-%{version}.tar.gz
+Source0:	https://github.com/containers/crun/archive/%{version}/%{name}-%{version}.tar.gz
 # Those are pulled in with "git submodule" in upstream git
-Source1:	https://github.com/giuseppe/libocispec/archive/8302d573323e7c7af0850cb37d63ad3bfb9637b8.tar.gz
-Source2:	https://github.com/opencontainers/image-spec/archive/09950c5fb1bb6745e72aa26ecde0d540e35f5286.tar.gz
-Source3:	https://github.com/opencontainers/runtime-spec/archive/31e0d16c1cb7967f2ec8843472874da7accf2202.tar.gz
+Source1:	https://github.com/giuseppe/libocispec/archive/69a096a965ae47c5a83832b87e1d0a5178ca0b30.tar.gz
+Source2:	https://github.com/opencontainers/image-spec/archive/79b036d80240ae530a8de15e1d21c7ab9292c693.tar.gz
+Source3:	https://github.com/opencontainers/runtime-spec/archive/2086147713ebe64cd12681960914e81eadbbe1d9.tar.gz
 Group:		Servers
 License:	GPLv3+/LGPLv3+
 BuildRequires:	automake
@@ -38,6 +38,8 @@ mv runtime-spec-* runtime-spec
 cd ..
 autoreconf -fis
 %configure
+sed -i '/git-version.h/d' src/crun.c
+sed -i -e 's,GIT_VERSION,"%{version}-%{release}",g' src/crun.c
 
 %build
 %make_build
@@ -50,3 +52,4 @@ rm %{buildroot}%{_libdir}/*.a
 
 %files
 %{_bindir}/crun
+%{_mandir}/man1/crun.1*

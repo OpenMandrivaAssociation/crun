@@ -18,6 +18,7 @@ BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(libselinux)
 BuildRequires:	pkgconfig(libcap)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	gperf
 
 %description
 A fast and low-memory footprint OCI Container Runtime fully written in C.

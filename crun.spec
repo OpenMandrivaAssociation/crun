@@ -19,6 +19,9 @@ BuildRequires:	pkgconfig(libselinux)
 BuildRequires:	pkgconfig(libcap)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	gperf
+# Let's turn crun into a drop-in replacement for runc
+Obsoletes:	runc < 2:1.0.0-240
+Provides:	runc = 2:1.0.0-240
 
 %description
 A fast and low-memory footprint OCI Container Runtime fully written in C.
@@ -50,7 +53,9 @@ sed -i -e 's,GIT_VERSION,"%{version}-%{release}",g' src/crun.c
 # No point in shipping a static library if the headers
 # aren't installed...
 rm %{buildroot}%{_libdir}/*.a
+ln -s crun %{buildroot}%{_bindir}/runc
 
 %files
 %{_bindir}/crun
+%{_bindir}/runc
 %{_mandir}/man1/crun.1*

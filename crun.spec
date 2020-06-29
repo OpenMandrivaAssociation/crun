@@ -19,6 +19,8 @@ BuildRequires:	pkgconfig(libselinux)
 BuildRequires:	pkgconfig(libcap)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	gperf
+# Only for man page, might be worth excluding from bootstrap builds
+BuildRequires:	go-md2man
 # Let's turn crun into a drop-in replacement for runc
 Obsoletes:	runc < 2:1.0.0-240
 Provides:	runc = 2:1.0.0-240

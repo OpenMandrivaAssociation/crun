@@ -4,9 +4,12 @@ Version:	0.16
 Release:	1
 Source0:	https://github.com/containers/crun/archive/%{version}/%{name}-%{version}.tar.gz
 # Those are pulled in with "git submodule" in upstream git
+# (tpg) sounds like these are not needed anymore
+%if 0
 Source1:	https://github.com/giuseppe/libocispec/archive/5dfe2f406dc2d0f244aec621292e4e0a52149240.tar.gz
 Source2:	https://github.com/opencontainers/image-spec/archive/79b036d80240ae530a8de15e1d21c7ab9292c693.tar.gz
 Source3:	https://github.com/opencontainers/runtime-spec/archive/f9c09b4ea1dfa7379d70df3c30d6efa346c225d4.tar.gz
+%endif
 Group:		Servers
 License:	GPLv3+/LGPLv3+
 BuildRequires:	pkgconfig(yajl)
@@ -28,10 +31,10 @@ crun conforms to the OCI Container Runtime specifications
 (https://github.com/opencontainers/runtime-spec).
 
 %prep
-%autosetup -p1 -a 1
+%autosetup -p1
 
+%if 0
 rmdir libocispec
-mv libocispec-* libocispec
 cd libocispec
 rmdir image-spec runtime-spec
 tar xf %{S:2}
@@ -39,6 +42,7 @@ tar xf %{S:3}
 mv image-spec-* image-spec
 mv runtime-spec-* runtime-spec
 cd ..
+%endif
 
 autoreconf -fis
 %configure

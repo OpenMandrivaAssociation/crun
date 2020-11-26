@@ -1,6 +1,6 @@
 Name:		crun
 Summary:	OCI Container Runtime fully written in C
-Version:	0.15
+Version:	0.16
 Release:	1
 Source0:	https://github.com/containers/crun/archive/%{version}/%{name}-%{version}.tar.gz
 # Those are pulled in with "git submodule" in upstream git
@@ -9,10 +9,6 @@ Source2:	https://github.com/opencontainers/image-spec/archive/79b036d80240ae530a
 Source3:	https://github.com/opencontainers/runtime-spec/archive/f9c09b4ea1dfa7379d70df3c30d6efa346c225d4.tar.gz
 Group:		Servers
 License:	GPLv3+/LGPLv3+
-BuildRequires:	automake
-BuildRequires:	autoconf
-BuildRequires:	libtool
-BuildRequires:	make
 BuildRequires:	pkgconfig(yajl)
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(libselinux)
@@ -33,6 +29,7 @@ crun conforms to the OCI Container Runtime specifications
 
 %prep
 %autosetup -p1 -a 1
+
 rmdir libocispec
 mv libocispec-* libocispec
 cd libocispec
@@ -42,6 +39,7 @@ tar xf %{S:3}
 mv image-spec-* image-spec
 mv runtime-spec-* runtime-spec
 cd ..
+
 autoreconf -fis
 %configure
 sed -i '/git-version.h/d' src/crun.c
@@ -52,6 +50,7 @@ sed -i -e 's,GIT_VERSION,"%{version}-%{release}",g' src/crun.c
 
 %install
 %make_install
+
 # No point in shipping a static library if the headers
 # aren't installed...
 rm %{buildroot}%{_libdir}/*.a

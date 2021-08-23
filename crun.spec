@@ -1,10 +1,11 @@
 Name:		crun
 Summary:	OCI Container Runtime fully written in C
-Version:	0.19.1
+Version:	0.21
 Release:	1
-Source0:	https://github.com/containers/crun/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/containers/crun/releases/download/%{version}/crun-%{version}.tar.xz
 # Those are pulled in with "git submodule" in upstream git
-# (tpg) sounds like these are not needed anymore
+# They're not needed when using an official release tarball, but
+# needed when using a git checkout.
 %if 0
 Source1:	https://github.com/giuseppe/libocispec/archive/5dfe2f406dc2d0f244aec621292e4e0a52149240.tar.gz
 Source2:	https://github.com/opencontainers/image-spec/archive/79b036d80240ae530a8de15e1d21c7ab9292c693.tar.gz

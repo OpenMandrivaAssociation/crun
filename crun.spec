@@ -1,6 +1,6 @@
 Name:		crun
 Summary:	OCI Container Runtime fully written in C
-Version:	1.4.2
+Version:	1.4.5
 Release:	1
 Source0:	https://github.com/containers/crun/releases/download/%{version}/crun-%{version}.tar.xz
 # Those are pulled in with "git submodule" in upstream git
@@ -64,4 +64,4 @@ ln -s crun %{buildroot}%{_bindir}/runc
 %files
 %{_bindir}/crun
 %{_bindir}/runc
-%{_mandir}/man1/crun.1*
+%doc %{_mandir}/man1/crun.1*

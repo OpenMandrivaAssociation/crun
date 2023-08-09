@@ -1,7 +1,7 @@
 Name:		crun
 Summary:	OCI Container Runtime fully written in C
-Version:	1.8
-Release:	2
+Version:	1.8.6
+Release:	1
 Source0:	https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.xz
 # Those are pulled in with "git submodule" in upstream git
 # They're not needed when using an official release tarball, but

@@ -13,6 +13,11 @@ Source3:	https://github.com/opencontainers/runtime-spec/archive/f9c09b4ea1dfa737
 %endif
 Group:		Servers
 License:	GPLv3+/LGPLv3+
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(yajl)
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(libselinux)

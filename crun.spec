@@ -15,7 +15,6 @@ Group:		Servers
 License:	GPLv3+/LGPLv3+
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	pkgconfig(json-c)
@@ -51,15 +50,17 @@ cd ..
 %endif
 
 autoreconf -fis
-%configure
+# The configure macro adds --disable-static; with LT_INIT(disable-shared)
+# that makes slibtool.m4 set SLIBTOOL=false. Keep the static convenience lib.
+%configure --enable-static
 sed -i '/git-version.h/d' src/crun.c
 sed -i -e 's,GIT_VERSION,"%{version}-%{release}",g' src/crun.c
 
 %build
-%make_build
+%make_build LIBTOOL=slibtool-static SLIBTOOL=slibtool-static
 
 %install
-%make_install
+%make_install LIBTOOL=slibtool-static SLIBTOOL=slibtool-static
 
 # No point in shipping a static library if the headers
 # aren't installed...

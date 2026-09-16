@@ -1,6 +1,6 @@
 Name:		crun
 Summary:	OCI Container Runtime fully written in C
-Version:	1.28
+Version:	1.29.1
 Release:	1
 Source0:	https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.zst
 # Those are pulled in with "git submodule" in upstream git
@@ -18,7 +18,7 @@ BuildRequires:	automake
 BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
-BuildRequires:	pkgconfig(yajl)
+BuildRequires:	pkgconfig(json-c)
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(libselinux)
 BuildRequires:	pkgconfig(libcap)

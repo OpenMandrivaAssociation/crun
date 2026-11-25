@@ -62,9 +62,10 @@ sed -i -e 's,GIT_VERSION,"%{version}-%{release}",g' src/crun.c
 %install
 %make_install LIBTOOL=slibtool-static SLIBTOOL=slibtool-static
 
-# No point in shipping a static library if the headers
-# aren't installed...
-rm %{buildroot}%{_libdir}/*.a
+# The binary links the static convenience library. 1.31 also installs
+# the public header, which is useless without that library.
+rm -f %{buildroot}%{_libdir}/*.a
+rm -f %{buildroot}%{_includedir}/libcrun.h
 ln -s crun %{buildroot}%{_bindir}/runc
 
 %files
